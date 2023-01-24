@@ -1,0 +1,6 @@
+services:
+  App\Bundle\EventSubscriber\ExceptionSubscriber:
+    arguments:
+      - '@ApacheBorys\Retry\ExceptionHandler'
+    tags:
+      - { name: kernel.event_subscriber }

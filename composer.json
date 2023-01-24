@@ -1,0 +1,17 @@
+{
+    "name": "apacheborys/re-try-php-symfony-bridge",
+    "description": "Symfony bridge for Retry php library",
+    "type": "library",
+    "license": "Apache License 2.0",
+    "autoload": {
+        "psr-4": {
+            "Apacheborys\\ReTryPhpSymfonyBridge\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Borys Yermokhin"
+        }
+    ],
+    "require": {}
+}
