@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Bundle\EventSubscriber;
+namespace ApacheBorys\Retry\SymfonyBridge\EventSubscriber;
 
 use ApacheBorys\Retry\ExceptionHandler;
 use Symfony\Component\Console\ConsoleEvents;
@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class ExceptionSubscriber implements EventSubscriberInterface
+class ExceptionRetrySubscriber implements EventSubscriberInterface
 {
     private ExceptionHandler $exceptionHandler;
 

@@ -5,7 +5,7 @@
     "license": "Apache License 2.0",
     "autoload": {
         "psr-4": {
-            "Apacheborys\\ReTryPhpSymfonyBridge\\": "src/"
+            "ApacheBorys\\Retry\\SymfonyBridge\\": "src/"
         }
     },
     "authors": [
@@ -13,5 +13,11 @@
             "name": "Borys Yermokhin"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/http-kernel": "^5.4",
+        "apacheborys/re-try-php": "^0.14.0",
+        "symfony/config": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/console": "^5.4"
+    }
 }

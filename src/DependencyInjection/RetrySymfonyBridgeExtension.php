@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace App\Bundle\DependencyInjection;
+namespace ApacheBorys\Retry\SymfonyBridge\DependencyInjection;
 
 use ApacheBorys\Retry\ExceptionHandler;
 use ApacheBorys\Retry\HandlerExceptionDeclarator\PublicCallbackDeclarator;
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class RetryExtension extends Extension
+class RetrySymfonyBridgeExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
