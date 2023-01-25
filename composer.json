@@ -8,6 +8,11 @@
             "ApacheBorys\\Retry\\SymfonyBridge\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ApacheBorys\\Retry\\SymfonyBridge\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Borys Yermokhin"
@@ -19,5 +24,10 @@
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
         "symfony/console": "^5.4"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "nyholm/symfony-bundle-test": "^2.0",
+        "phpunit/phpunit": "^9.5"
     }
 }
