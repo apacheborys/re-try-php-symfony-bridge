@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ApacheBorys\Retry\SymfonyBridge\Tests;
 
 use ApacheBorys\Retry\ExceptionHandler;
-use ApacheBorys\Retry\SymfonyBridge\RetrySymfonyBridgeBundle;
+use ApacheBorys\Retry\SymfonyBridge\RetryBundle;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -22,7 +22,7 @@ class BundleInitialisationTest extends KernelTestCase
          * @var TestKernel $kernel
          */
         $kernel = parent::createKernel($options);
-        $kernel->addTestBundle(RetrySymfonyBridgeBundle::class);
+        $kernel->addTestBundle(RetryBundle::class);
         $kernel->handleOptions($options);
 
         return $kernel;
@@ -50,7 +50,7 @@ class BundleInitialisationTest extends KernelTestCase
         // Boot the kernel with a config closure, the handleOptions call in createKernel is important for that to work
         $kernel = self::bootKernel(['config' => static function(TestKernel $kernel){
             // Add some other bundles we depend on
-            $kernel->addTestBundle(RetrySymfonyBridgeBundle::class);
+            $kernel->addTestBundle(RetryBundle::class);
 
             // Add some configuration
             $kernel->addTestConfig(__DIR__ . '/config.yml');

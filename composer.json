@@ -1,5 +1,5 @@
 {
-    "name": "apacheborys/re-try-php-symfony-bridge",
+    "name": "apacheborys/re-try-php-symfony-bundle",
     "description": "Symfony bridge for Retry php library",
     "type": "library",
     "license": "Apache License 2.0",
@@ -18,6 +18,11 @@
             "name": "Borys Yermokhin"
         }
     ],
+    "scripts": {
+        "test": [
+            "php vendor/bin/phpunit tests"
+        ]
+    },
     "require": {
         "symfony/http-kernel": "^5.4",
         "apacheborys/re-try-php": "^0.14.0",

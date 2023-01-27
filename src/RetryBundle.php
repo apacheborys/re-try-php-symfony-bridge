@@ -4,7 +4,7 @@ namespace ApacheBorys\Retry\SymfonyBridge;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class RetrySymfonyBridgeBundle extends Bundle
+class RetryBundle extends Bundle
 {
 
 }
