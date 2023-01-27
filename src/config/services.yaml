@@ -1,0 +1,6 @@
+services:
+  ApacheBorys\Retry\SymfonyBridge\EventSubscriber\ExceptionRetrySubscriber:
+    arguments:
+      - '@ApacheBorys\Retry\ExceptionHandler'
+    tags:
+      - { name: kernel.event_subscriber }

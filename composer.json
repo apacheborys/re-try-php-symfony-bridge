@@ -1,0 +1,39 @@
+{
+    "name": "apacheborys/re-try-php-symfony-bundle",
+    "description": "Symfony bridge for Retry php library",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ApacheBorys\\Retry\\SymfonyBridge\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApacheBorys\\Retry\\SymfonyBridge\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Borys Yermokhin"
+        }
+    ],
+    "scripts": {
+        "test": [
+            "./vendor/bin/psalm",
+            "php vendor/bin/phpunit tests"
+        ]
+    },
+    "require": {
+        "symfony/http-kernel": "^5.4",
+        "apacheborys/re-try-php": "^0.14.0",
+        "symfony/config": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/console": "^5.4",
+        "vimeo/psalm": "^5.6"
+    },
+    "require-dev": {
+        "nyholm/symfony-bundle-test": "^2.0",
+        "phpunit/phpunit": "^9.5"
+    }
+}

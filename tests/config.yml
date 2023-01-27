@@ -1,0 +1,17 @@
+retry:
+  items:
+    test:
+      exception: "Exception"
+      maxRetries: 4
+      formula:
+        - {operator: "+", argument: "QTY_TRIES"}
+        - {operator: "*", argument: "5"}
+      transport:
+        class: "\\ApacheBorys\\Retry\\BasicTransport\\FileTransport"
+        arguments:
+          - 'var/retry-db.data'
+      executor:
+        class: "\\ApacheBorys\\Retry\\BasicExecutor\\CommandExecutor"
+        arguments:
+          - 'php'
+          - ['app:fake']
