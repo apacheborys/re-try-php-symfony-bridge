@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ApacheBorys\Retry\SymfonyBridge\EventSubscriber;
 
 use ApacheBorys\Retry\ExceptionHandler;
+use ApacheBorys\Retry\HandlerExceptionDeclarator\PublicCallbackDeclarator;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -33,11 +34,22 @@ class ExceptionRetrySubscriber implements EventSubscriberInterface
 
     public function processException(ExceptionEvent $event): void
     {
-        $this->exceptionHandler->getDeclarator()->getCallback()($event->getThrowable());
+        $this->getDeclarator()->getCallback()($event->getThrowable());
     }
 
     public function processConsoleError(ConsoleErrorEvent $event): void
     {
-        $this->exceptionHandler->getDeclarator()->getCallback()($event->getError());
+        $this->getDeclarator()->getCallback()($event->getError());
+    }
+
+    private function getDeclarator(): PublicCallbackDeclarator
+    {
+        $declarator = $this->exceptionHandler->getDeclarator();
+
+        if ($declarator instanceof PublicCallbackDeclarator) {
+            return $declarator;
+        }
+
+        throw new \LogicException('Wrong declarator in runtime for Retry bundle');
     }
 }

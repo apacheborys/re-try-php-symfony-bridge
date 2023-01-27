@@ -20,6 +20,7 @@
     ],
     "scripts": {
         "test": [
+            "./vendor/bin/psalm",
             "php vendor/bin/phpunit tests"
         ]
     },
@@ -28,10 +29,10 @@
         "apacheborys/re-try-php": "^0.14.0",
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
-        "symfony/console": "^5.4"
+        "symfony/console": "^5.4",
+        "vimeo/psalm": "^5.6"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "nyholm/symfony-bundle-test": "^2.0",
         "phpunit/phpunit": "^9.5"
     }

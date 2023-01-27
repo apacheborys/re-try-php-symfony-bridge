@@ -8,6 +8,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ConfigSchema implements ConfigurationInterface
 {
+    /**
+     * @psalm-suppress PossiblyUndefinedMethod
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('retry');
