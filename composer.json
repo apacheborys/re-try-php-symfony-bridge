@@ -2,7 +2,7 @@
     "name": "apacheborys/re-try-php-symfony-bundle",
     "description": "Symfony bridge for Retry php library",
     "type": "library",
-    "license": "Apache License 2.0",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "ApacheBorys\\Retry\\SymfonyBridge\\": "src/"
