@@ -6,6 +6,7 @@ namespace ApacheBorys\Retry\SymfonyBridge\DependencyInjection;
 use ApacheBorys\Retry\ExceptionHandler;
 use ApacheBorys\Retry\HandlerExceptionDeclarator\PublicCallbackDeclarator;
 use ApacheBorys\Retry\MessageHandler;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -29,13 +30,19 @@ class RetryExtension extends Extension
             $config['handlerExceptionDeclarator']['arguments'] = [];
         }
 
-        $definitionForExceptionHandler = new Definition(ExceptionHandler::class, [$config, new Reference(LoggerInterface::class)]);
+        $definitionForExceptionHandler = new Definition(
+            ExceptionHandler::class,
+            [$config, new Reference(LoggerInterface::class), new Reference(ContainerInterface::class)]
+        );
         $definitionForExceptionHandler->addMethodCall('initHandler');
         $definitionForExceptionHandler->setPublic(true);
 
         $container->setDefinition(ExceptionHandler::class, $definitionForExceptionHandler);
 
-        $definitionForMessageHandler = new Definition(MessageHandler::class, [$config, new Reference(LoggerInterface::class)]);
+        $definitionForMessageHandler = new Definition(
+            MessageHandler::class,
+            [$config, new Reference(LoggerInterface::class), new Reference(ContainerInterface::class)]
+        );
         $definitionForMessageHandler->setPublic(true);
 
         $container->setDefinition(MessageHandler::class, $definitionForMessageHandler);

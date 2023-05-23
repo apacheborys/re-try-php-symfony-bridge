@@ -26,7 +26,7 @@
     },
     "require": {
         "symfony/http-kernel": "^5.4",
-        "apacheborys/re-try-php": "^0.15.0",
+        "apacheborys/re-try-php": "^0.15.1",
         "symfony/config": "^5.4",
         "symfony/dependency-injection": "^5.4",
         "symfony/console": "^5.4",
