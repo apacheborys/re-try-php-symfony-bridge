@@ -5,6 +5,7 @@ namespace ApacheBorys\Retry\SymfonyBridge\DependencyInjection;
 
 use ApacheBorys\Retry\ExceptionHandler;
 use ApacheBorys\Retry\HandlerExceptionDeclarator\PublicCallbackDeclarator;
+use ApacheBorys\Retry\HandlerFactory;
 use ApacheBorys\Retry\MessageHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -25,26 +26,43 @@ class RetryExtension extends Extension
         $configuration = new ConfigSchema();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $this->normalizeConfig($config);
+
+        $container->setDefinition(
+            'retry.exception_handler_factory',
+            new Definition(HandlerFactory::class, [$config, new Reference(LoggerInterface::class)])
+        );
+
+        $container->setDefinition(ExceptionHandler::class, $this->defineExceptionHandler());
+
+        $container->setDefinition(MessageHandler::class, $this->defineMessageHandler());
+    }
+
+    private function normalizeConfig(array &$config): void
+    {
         if (!isset($config['handlerExceptionDeclarator'])) {
             $config['handlerExceptionDeclarator']['class'] = PublicCallbackDeclarator::class;
             $config['handlerExceptionDeclarator']['arguments'] = [];
         }
+    }
 
-        $definitionForExceptionHandler = new Definition(
-            ExceptionHandler::class,
-            [$config, new Reference(LoggerInterface::class), new Reference(ContainerInterface::class)]
-        );
-        $definitionForExceptionHandler->addMethodCall('initHandler');
-        $definitionForExceptionHandler->setPublic(true);
+    private function defineExceptionHandler(): Definition
+    {
+        $exceptionHandlerDefinition = new Definition(ExceptionHandler::class);
+        $exceptionHandlerDefinition->setFactory([new Reference('retry.exception_handler_factory'), 'createExceptionHandler']);
+        $exceptionHandlerDefinition->addArgument(new Reference(ContainerInterface::class));
+        $exceptionHandlerDefinition->setPublic(true);
 
-        $container->setDefinition(ExceptionHandler::class, $definitionForExceptionHandler);
+        return $exceptionHandlerDefinition;
+    }
 
-        $definitionForMessageHandler = new Definition(
-            MessageHandler::class,
-            [$config, new Reference(LoggerInterface::class), new Reference(ContainerInterface::class)]
-        );
-        $definitionForMessageHandler->setPublic(true);
+    private function defineMessageHandler(): Definition
+    {
+        $messageHandlerDefinition = new Definition(MessageHandler::class);
+        $messageHandlerDefinition->setFactory([new Reference('retry.exception_handler_factory'), 'createMessageHandler']);
+        $messageHandlerDefinition->addArgument(new Reference(ContainerInterface::class));
+        $messageHandlerDefinition->setPublic(true);
 
-        $container->setDefinition(MessageHandler::class, $definitionForMessageHandler);
+        return $messageHandlerDefinition;
     }
 }
